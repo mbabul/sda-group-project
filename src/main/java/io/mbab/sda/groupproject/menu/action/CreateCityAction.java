@@ -1,6 +1,7 @@
 package io.mbab.sda.groupproject.menu.action;
 
 import io.mbab.sda.groupproject.entity.City;
+import io.mbab.sda.groupproject.menu.CustomScanner;
 import io.mbab.sda.groupproject.menu.MenuActionContext;
 import io.mbab.sda.groupproject.repository.CityRepository;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CreateCityAction implements MenuAction {
 
+  private final CustomScanner scanner;
   private final MenuActionContext ctx;
   private final CityRepository repository;
 

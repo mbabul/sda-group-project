@@ -1,11 +1,13 @@
 package io.mbab.sda.groupproject.menu.action;
 
+import io.mbab.sda.groupproject.menu.CustomScanner;
 import io.mbab.sda.groupproject.menu.MenuActionContext;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class MainAction implements MenuAction {
 
+  private final CustomScanner scanner;
   private final MenuActionContext ctx;
 
   @Override

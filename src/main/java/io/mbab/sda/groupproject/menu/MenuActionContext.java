@@ -16,8 +16,8 @@ public class MenuActionContext {
   private MenuAction action;
   private Map<Class<? extends MenuAction>, MenuAction> holder = new HashMap<>();
 
-  public MenuActionContext(CrudRepositoryFactory repositoryFactory) {
-    initHolder(repositoryFactory);
+  public MenuActionContext(CustomScanner scanner, CrudRepositoryFactory repositoryFactory) {
+    initHolder(scanner, repositoryFactory);
   }
 
   public MenuActionContext use(Class<? extends MenuAction> actionClass) {
@@ -31,11 +31,11 @@ public class MenuActionContext {
     action.execute();
   }
 
-  private void initHolder(CrudRepositoryFactory repositoryFactory) {
-    holder.put(MainAction.class, new MainAction(this));
+  private void initHolder(CustomScanner scanner, CrudRepositoryFactory repositoryFactory) {
+    holder.put(MainAction.class, new MainAction(scanner, this));
     holder.put(
         CreateCityAction.class,
-        new CreateCityAction(this, repositoryFactory.get(CityRepository.class)));
+        new CreateCityAction(scanner, this, repositoryFactory.get(CityRepository.class)));
     holder.put(
         ViewCitiesAction.class,
         new ViewCitiesAction(this, repositoryFactory.get(CityRepository.class)));
