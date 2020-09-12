@@ -9,6 +9,7 @@ public class MainAction implements MenuAction {
 
   private final CustomScanner scanner;
   private final MenuActionContext ctx;
+  private final MainActionStrategy strategy;
 
   @Override
   public void execute() {
@@ -18,22 +19,13 @@ public class MainAction implements MenuAction {
 
     var input = scanner.nextLine();
 
-    if (input.equals("0")) {
-      System.exit(0);
-      return;
-    }
-
-    if (input.equals("1")) {
-      ctx.use(CreateCityAction.class).execute();
-      return;
-    }
-
-    if (input.equals("2")) {
-      ctx.use(ViewCitiesAction.class).execute();
-      return;
-    }
-
-    System.out.println("Wprowadzono nieprawidłowa wartość!");
-    execute();
+    strategy
+        .prepareCtx(input, ctx)
+        .ifPresentOrElse(
+            MenuActionContext::execute,
+            () -> {
+              System.out.println("Wprowadzono nieprawidłowa wartość!");
+              execute();
+            });
   }
 }
